@@ -13,7 +13,13 @@ public class Token {
         this.string = string;
     }
 
+    @Override
+    public String toString() {
+        return "{" + type + ": " + string + '}';
+    }
+
     public TokenType getType() {
         return type;
     }
+
 }

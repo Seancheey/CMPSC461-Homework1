@@ -16,8 +16,8 @@ public class Lexer {
     private static final HashMap<TokenType, String> RULES = new HashMap<>();
 
     static {
-        RULES.put(TokenType.keyword, "");
-        RULES.put(TokenType.string, "[\\s|\\d]+");
+        RULES.put(TokenType.keyword, "</?(body|b|i|ul|li)>");
+        RULES.put(TokenType.string, "\\w+");
     }
 
     public Lexer(String originString) {
@@ -26,25 +26,31 @@ public class Lexer {
 
     public ArrayList<Token> getTokenList() {
         // TODO implement
+        ArrayList<Token> tokens = new ArrayList<>();
         int searchPos = 0;
         while (true) {
             String subString = originString.substring(searchPos);
             boolean found = false;
-            for (TokenType type : RULES.keySet()) {
-                String rule = RULES.get(type);
-                Pattern p = Pattern.compile(rule);
-                Matcher m = p.matcher(subString);
-                if (m.find()) {
-                    found = true;
+            Matcher nonSpaceMatcher = Pattern.compile("\\S").matcher(subString);
+            if (nonSpaceMatcher.find()) {
+                for (TokenType type : RULES.keySet()) {
+                    String rule = RULES.get(type);
+                    Pattern p = Pattern.compile(rule);
+                    Matcher m = p.matcher(subString);
+                    if (m.find() && m.start() == nonSpaceMatcher.start()) {
+                        found = true;
+                        tokens.add(new Token(type, m.group()));
+                        searchPos += m.end();
+                        break;
+                    }
                 }
-            }
-            if (searchPos == originString.length()) {
+            } else {
                 break;
             }
             if (!found) {
                 throw new ValueException("Pattern cannot be found at pos " + searchPos + " with subString " + subString);
             }
         }
-        return null;
+        return tokens;
     }
 }
