@@ -8,7 +8,7 @@ public class Token {
     private TokenType type;
     private String value;
 
-    public Token(TokenType type, String value) {
+    Token(TokenType type, String value) {
         this.type = type;
         this.value = value;
     }
@@ -20,6 +20,10 @@ public class Token {
 
     public TokenType getType() {
         return type;
+    }
+
+    public String getValue() {
+        return value;
     }
 
 }
