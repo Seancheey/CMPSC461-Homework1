@@ -6,16 +6,16 @@ package com.seancheey;
  */
 public class Token {
     private TokenType type;
-    private String string;
+    private String value;
 
-    public Token(TokenType type, String string) {
+    public Token(TokenType type, String value) {
         this.type = type;
-        this.string = string;
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return "{" + type + ": " + string + '}';
+        return "{" + type + ": " + value + '}';
     }
 
     public TokenType getType() {
