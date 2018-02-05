@@ -3,6 +3,7 @@ package com.seancheey;
 /**
  * Created by Seancheey on 02/02/2018.
  * GitHub: https://github.com/Seancheey
+ * Description: Parse the token list into AST(output in this case)
  */
 public class Parser {
     private Lexer lexer;
@@ -70,9 +71,9 @@ public class Parser {
         if (token.getType() == type)
             token = lexer.nextToken();
         else {
-            System.err.println("Syntax error: expecting: " + token.getType().toString()
+            System.err.println("Syntax error: expecting: " + type.toString()
                     + "; saw: "
-                    + type.toString());
+                    + token.getType().toString());
             System.exit(1);
         }
         return value;
