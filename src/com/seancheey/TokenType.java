@@ -5,5 +5,5 @@ package com.seancheey;
  * GitHub: https://github.com/Seancheey
  */
 public enum TokenType {
-    keyword, string
+    keyword, string, EOI, invalid
 }

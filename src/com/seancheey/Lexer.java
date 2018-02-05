@@ -1,7 +1,5 @@
 package com.seancheey;
 
-import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -39,16 +37,16 @@ public class Lexer {
                 }
             }
         } else {
-            return null;
+            return new Token(TokenType.EOI, null);
         }
-        throw new ValueException("Pattern cannot be found at pos " + searchPos + " with subString " + subString);
+        return new Token(TokenType.invalid, null);
     }
 
     public ArrayList<Token> getTokenList() {
         ArrayList<Token> tokens = new ArrayList<>();
         while (true) {
             Token token = nextToken();
-            if (token != null) {
+            if (token.getType() != TokenType.EOI) {
                 tokens.add(token);
             } else {
                 break;
