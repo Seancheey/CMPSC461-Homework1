@@ -61,6 +61,8 @@ public class Parser {
         // </body>
         value = verifyValue("</body>", match(TokenType.keyword));
         System.out.println(indent(indentLevel) + value);
+        // EOI
+        match(TokenType.EOI);
     }
 
     // parsing non-terminal "text"
